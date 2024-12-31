@@ -59,7 +59,17 @@ exports.handler = async (event, context, callback) => {
 
 // Handle /mm Command using the mutemCommandHandler module
   if (body.data.name == 'mm') {
-    return mutemCommandHandler(body);
+    try {
+      return mutemCommandHandler(body);
+    } catch (error) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          type: 4,
+          data: { content: error.message },
+        }),
+      };
+    }
   }
 
   if (body.data.name == 'modal') {
