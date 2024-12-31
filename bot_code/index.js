@@ -3,6 +3,9 @@ const nacl = require('tweetnacl');
 const helloCommandHandler = require('./_hello'); // Import the helloCommandHandler module
 const greetCommandHandler = require('./_greet'); // Import the greetCommandHandler module
 const mballCommandHandler = require('./_8ball'); // Import the mballCommandHandler module
+const mutemCommandHandler = require('./_mm'); // Import the mutemCommandHandler module
+const getmodal = require('./_showmodal'); // Import the mutemCommandHandler module
+const modalHandler = require('./_handlemodal'); // Import the mutemCommandHandler module
 
 exports.handler = async (event, context, callback) => {
 // Checking signature (requirement 1.)
@@ -34,6 +37,11 @@ exports.handler = async (event, context, callback) => {
     }
   }
 
+  if (body.type === 5) { // 모달 제출 이벤트 처리
+    return modalHandler(body);
+  }
+  
+
 // Handle /hello Command using the helloCommandHandler module
   if (body.data.name == 'hello') {
     return helloCommandHandler(body);
@@ -48,6 +56,15 @@ exports.handler = async (event, context, callback) => {
   if (body.data.name == '8ball') {
     return mballCommandHandler(body);
   }
+
+// Handle /mm Command using the mutemCommandHandler module
+  if (body.data.name == 'mm') {
+    return mutemCommandHandler(body);
+  }
+
+  if (body.data.name == 'modal') {
+    return getmodal(body);
+  }  
 
 // END OF FILE
   return {
