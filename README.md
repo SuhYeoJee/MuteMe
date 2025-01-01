@@ -3,3 +3,5 @@
 
 
 skeleton code from [simple bot](https://github.com/kastleghost/simplebot.git)
+
+node register.js

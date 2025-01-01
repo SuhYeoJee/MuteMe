@@ -5,6 +5,7 @@ config.ini
 doc/
 node_modules/
 *.zip
+register_cmd/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
