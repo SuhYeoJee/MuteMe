@@ -1,12 +1,12 @@
 const nacl = require('tweetnacl');
-
-const helloCommandHandler = require('./_hello'); // Import the helloCommandHandler module
-const greetCommandHandler = require('./_greet'); // Import the greetCommandHandler module
-const mballCommandHandler = require('./_8ball'); // Import the mballCommandHandler module
+// [import command handler] ===============================================
+const echoCommandHandler = require('./_echo');
+const mballCommandHandler = require('./_hey');
+const mutemCommandHandler = require('./_mm');
+// ========================================================================
 
 exports.handler = async (event, context, callback) => {
 // Checking signature (requirement 1.)
-// Your public key can be found on your application in the Developer Portal
   const PUBLIC_KEY = process.env.PUBLIC_KEY;
   const signature = event.headers['x-signature-ed25519']
   const timestamp = event.headers['x-signature-timestamp'];
@@ -25,6 +25,7 @@ exports.handler = async (event, context, callback) => {
     };
   }
 
+// ========================================================================
 // Replying to ping (requirement 2.)
   const body = JSON.parse(strBody)
   if (body.type == 1) {
@@ -33,22 +34,30 @@ exports.handler = async (event, context, callback) => {
       body: JSON.stringify({ "type": 1 }),
     }
   }
-
-// Handle /hello Command using the helloCommandHandler module
-  if (body.data.name == 'hello') {
-    return helloCommandHandler(body);
-  }  
-
-// Handle /greet Command using the greetCommandHandler module
-  if (body.data.name == 'greet') {
-    return greetCommandHandler(body);
+// ========================================================================
+// Handle /ver Command using the mutemCommandHandler module
+if (body.data.name == 'mm-ver') {
+  return { // return msg
+    statusCode: 200,
+    body: JSON.stringify({
+        type: 4,
+        data: { content: '1.0.0-250102' },
+    }),
+  };
+}
+// Handle /mm Command using the mutemCommandHandler module
+if (body.data.name == 'mm') {
+  return mutemCommandHandler(body);
+}
+// Handle /echo Command using the echoCommandHandler module
+  if (body.data.name == 'echo') {
+    return echoCommandHandler(body);
   }
-
-// Handle /8ball Command using the 8ballCommandHandler module
-  if (body.data.name == '8ball') {
+// Handle /hey Command using the heyCommandHandler module
+  if (body.data.name == 'hey') {
     return mballCommandHandler(body);
   }
-
+// ========================================================================
 // END OF FILE
   return {
     statusCode: 404, // If no handler implemented for Discord's request
