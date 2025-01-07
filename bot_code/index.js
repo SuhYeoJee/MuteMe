@@ -41,7 +41,7 @@ if (body.data.name == 'mm-ver') {
     statusCode: 200,
     body: JSON.stringify({
         type: 4,
-        data: { content: '1.0.1-250107' },
+        data: { content: '1.0.0-250102' },
     }),
   };
 }
@@ -50,19 +50,13 @@ if (body.data.name == 'mm') {
   return mutemCommandHandler(body);
 }
 // Handle /echo Command using the echoCommandHandler module
-  if (body.data.name == 'echo') {
-    return echoCommandHandler(body);
-  }
+if (body.data.name == 'echo') {
+  return echoCommandHandler(body);
+}
 // Handle /hey Command using the heyCommandHandler module
-  if (body.data.name == 'hey') {
-    return mballCommandHandler(body);
-  }
-  if (body.data.name == 'devdev') {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ "type": 1 }),
-    }
-  }
+if (body.data.name == 'hey') {
+  return mballCommandHandler(body);
+}
 // ========================================================================
 // END OF FILE
   return {
