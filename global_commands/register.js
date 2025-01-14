@@ -47,6 +47,19 @@ const commands = [
     ]
   },
   {
+    "name": "rating",
+    "type": 1,
+    "description": "제 점수는요",
+    "options": [
+      {
+        "name": "question",
+        "description": "네 잘들었습니다.",
+        "type": 3, // String option type
+        "required": true
+      }
+    ]
+  },
+  {
     "name": "mm",
     "type": 1,
     "description": "n분간 정신을 닫습니다: 기본 3분. ",
@@ -55,14 +68,9 @@ const commands = [
         "name": "duration",
         "description": "침묵은 금이다. 더 많은 금.",
         "type": 4, // int option type
-        "required": true
+        "required": false
       }
     ]
-  },  
-  {
-    "name": "devdev",
-    "type": 1,
-    "description": "개발개발자를 괴롭힙니다. 아무 기능이 없습니다.",
   }
 ];
 

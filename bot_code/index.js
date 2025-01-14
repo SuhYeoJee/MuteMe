@@ -2,6 +2,7 @@ const nacl = require('tweetnacl');
 // [import command handler] ===============================================
 const echoCommandHandler = require('./_echo');
 const mballCommandHandler = require('./_hey');
+const ratingCommandHandler = require('./_rating');
 const mutemCommandHandler = require('./_mm');
 // ========================================================================
 
@@ -41,7 +42,7 @@ if (body.data.name == 'mm-ver') {
     statusCode: 200,
     body: JSON.stringify({
         type: 4,
-        data: { content: '1.0.0-250102' },
+        data: { content: '1.1.0-250114' },
     }),
   };
 }
@@ -56,6 +57,10 @@ if (body.data.name == 'echo') {
 // Handle /hey Command using the heyCommandHandler module
 if (body.data.name == 'hey') {
   return mballCommandHandler(body);
+}
+// Handle /rating Command using the ratingCommandHandler module
+if (body.data.name == 'rating') {
+  return ratingCommandHandler(body);
 }
 // ========================================================================
 // END OF FILE
